@@ -125,29 +125,38 @@ int remove_trailing_bytes(const char *file_name, size_t nbytes) {
 }
 
 int create_archive(const char *archive_name, const file_list_t *files) {
+    // Checking whether archive_name and files contain the valid value
     if(archive_name == NULL || files == NULL || files->head == NULL || files->size == 0){
         return -1;
     }
+
+    // Creating a new archive
     FILE* archive = fopen(archive_name, "w");
+    // Checking whether the archive is successfully created
     if(archive == NULL){
         perror("archive open");
         return -1;
     }
+    // Create visual space for header
     tar_header *header = malloc(sizeof(tar_header));
+    // Checking whether the space has created
     if(header == NULL){
         perror("malloc");
         fclose(archive);
         return -1;
     }
+    // Save files's head into current
     node_t *current = files->head;
     for (size_t i = 0; i < files->size; i++){
         char *file_name = current->name;
-        if(file_name == NULL){
-            perror("err_msg");
-            free(header);
-            fclose(archive);
-            return -1;
-        }
+        // Checking whethe it is a valid node. If not, give out the error message, free the header and, and stop the program.
+        // if(file_name == NULL){
+        //     perror("err_msg");
+        //     free(header);
+        //     fclose(archive);
+        //     return -1;
+        // }
+        // //
         if(fill_tar_header(header, file_name) != 0){
             free(header);
             fclose(archive);
@@ -198,8 +207,8 @@ int create_archive(const char *archive_name, const file_list_t *files) {
         }
         current = current->next;
     }
-    char footer[BLOCK_SIZE] = {0};
-    if (fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE || fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE){
+    char footer[2 * BLOCK_SIZE] = {0};
+    if (fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE){
         perror("fwrite footer");
         free(header);
         fclose(archive);
@@ -214,6 +223,7 @@ int create_archive(const char *archive_name, const file_list_t *files) {
 }
 
 int append_files_to_archive(const char *archive_name, const file_list_t *files) {
+    //
     if(archive_name == NULL || files == NULL || files->head == NULL || files->size == 0){
         return -1;
     }
@@ -306,7 +316,7 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files) 
 }
 
 int get_archive_file_list(const char *archive_name, file_list_t *files) {
-    // TODO: Not yet implemented
+    
     return 0;
 }
 
