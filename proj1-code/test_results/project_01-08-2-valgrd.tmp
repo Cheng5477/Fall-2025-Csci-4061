@@ -1,15 +1,30 @@
-==1600== Memcheck, a memory error detector
-==1600== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1600== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==1600== Command: ./minitar -c -f test.tar hello.txt f1.bin f2.bin f1.txt
-==1600== Parent PID: 1335
-==1600== 
-==1600== 
-==1600== HEAP SUMMARY:
-==1600==     in use at exit: 0 bytes in 0 blocks
-==1600==   total heap usage: 47 allocs, 47 frees, 70,001 bytes allocated
-==1600== 
-==1600== All heap blocks were freed -- no leaks are possible
-==1600== 
-==1600== For lists of detected and suppressed errors, rerun with: -s
-==1600== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==50397== Memcheck, a memory error detector
+==50397== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==50397== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==50397== Command: ./minitar -c -f test.tar hello.txt f1.bin f2.bin f1.txt
+==50397== Parent PID: 50148
+==50397== 
+==50397== 
+==50397== HEAP SUMMARY:
+==50397==     in use at exit: 160 bytes in 4 blocks
+==50397==   total heap usage: 51 allocs, 47 frees, 72,993 bytes allocated
+==50397== 
+==50397== 120 bytes in 3 blocks are indirectly lost in loss record 1 of 2
+==50397==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==50397==    by 0x10974E: file_list_add (file_list.c:27)
+==50397==    by 0x10950D: main (minitar_main.c:26)
+==50397== 
+==50397== 160 (40 direct, 120 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 2
+==50397==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==50397==    by 0x1096BC: file_list_add (file_list.c:13)
+==50397==    by 0x10950D: main (minitar_main.c:26)
+==50397== 
+==50397== LEAK SUMMARY:
+==50397==    definitely lost: 40 bytes in 1 blocks
+==50397==    indirectly lost: 120 bytes in 3 blocks
+==50397==      possibly lost: 0 bytes in 0 blocks
+==50397==    still reachable: 0 bytes in 0 blocks
+==50397==         suppressed: 0 bytes in 0 blocks
+==50397== 
+==50397== For lists of detected and suppressed errors, rerun with: -s
+==50397== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)

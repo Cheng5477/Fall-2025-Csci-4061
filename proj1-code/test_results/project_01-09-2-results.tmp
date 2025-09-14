@@ -1,4 +1,39 @@
 -- Create an initial archive using 'minitar'
 Expected output is in file 'test_results/raw/project_01-09-2-expected.tmp'
 Actual output is in file 'test_results/raw/project_01-09-2-actual.tmp'
-Test PASSED
+Error: VALGRIND CHECK FAILED. Output:
+fwrite footer: Success
+create_archive: Success
+
+
+== Valgrind Results (from 'test_results/project_01-09-2-valgrd.tmp')
+==50437== Memcheck, a memory error detector
+==50437== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==50437== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==50437== Command: ./minitar -c -f test.tar hello.txt f1.bin f2.bin f1.txt
+==50437== Parent PID: 50148
+==50437== 
+==50437== 
+==50437== HEAP SUMMARY:
+==50437==     in use at exit: 160 bytes in 4 blocks
+==50437==   total heap usage: 51 allocs, 47 frees, 72,993 bytes allocated
+==50437== 
+==50437== 120 bytes in 3 blocks are indirectly lost in loss record 1 of 2
+==50437==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==50437==    by 0x10974E: file_list_add (file_list.c:27)
+==50437==    by 0x10950D: main (minitar_main.c:26)
+==50437== 
+==50437== 160 (40 direct, 120 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 2
+==50437==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==50437==    by 0x1096BC: file_list_add (file_list.c:13)
+==50437==    by 0x10950D: main (minitar_main.c:26)
+==50437== 
+==50437== LEAK SUMMARY:
+==50437==    definitely lost: 40 bytes in 1 blocks
+==50437==    indirectly lost: 120 bytes in 3 blocks
+==50437==      possibly lost: 0 bytes in 0 blocks
+==50437==    still reachable: 0 bytes in 0 blocks
+==50437==         suppressed: 0 bytes in 0 blocks
+==50437== 
+==50437== For lists of detected and suppressed errors, rerun with: -s
+==50437== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)

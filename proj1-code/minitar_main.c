@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
             perror("create_archive");
             return 1;
         }
-    }else if(strcmp(op, "-a") == 0 && argc >= 5 && strcmp(argv[2], "-f") == 0){
+    } else if (strcmp(op, "-a") == 0 && argc >= 5 && strcmp(argv[2], "-f") == 0) {
         archive = argv[3];
         first_file_idx = 4;
         for (int i = first_file_idx; i < argc; ++i) {
@@ -43,8 +43,7 @@ int main(int argc, char **argv) {
             perror("create_archive");
             return 1;
         }
-    }
-    else {
+    } else {
         fprintf(stderr, "Unsupported op. Try: %s c ARCHIVE [FILE...]\n", argv[0]);
         return 1;
     }

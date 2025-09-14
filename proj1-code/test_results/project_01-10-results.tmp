@@ -1,40 +1,59 @@
-================================================================================================================================================================================
+=============================================================================================================================
 == Test 10: Single-File Archive List
 == Creates a single-file archive, then uses 'minitar' to list the files in that
 == archive.
 Running test...
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Step 1
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 Action 1: Run File Setup
 -- Copies files to be archived into current directory
 Expected output is in file 'test_results/raw/project_01-10-1-expected.tmp'
 Actual output is in file 'test_results/raw/project_01-10-1-actual.tmp'
 Test PASSED
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Step 2
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 Action 1: Run Archive Creation
 -- Create an initial archive using 'minitar'
 Expected output is in file 'test_results/raw/project_01-10-2-expected.tmp'
 Actual output is in file 'test_results/raw/project_01-10-2-actual.tmp'
-Test PASSED
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Error: VALGRIND CHECK FAILED. Output:
+fwrite footer: Success
+create_archive: Success
+
+
+== Valgrind Results (from 'test_results/project_01-10-2-valgrd.tmp')
+==50473== Memcheck, a memory error detector
+==50473== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==50473== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==50473== Command: ./minitar -c -f test.tar hello.txt
+==50473== Parent PID: 50148
+==50473== 
+==50473== 
+==50473== HEAP SUMMARY:
+==50473==     in use at exit: 40 bytes in 1 blocks
+==50473==   total heap usage: 30 allocs, 29 frees, 31,761 bytes allocated
+==50473== 
+==50473== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==50473==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==50473==    by 0x1096BC: file_list_add (file_list.c:13)
+==50473==    by 0x10950D: main (minitar_main.c:26)
+==50473== 
+==50473== LEAK SUMMARY:
+==50473==    definitely lost: 40 bytes in 1 blocks
+==50473==    indirectly lost: 0 bytes in 0 blocks
+==50473==      possibly lost: 0 bytes in 0 blocks
+==50473==    still reachable: 0 bytes in 0 blocks
+==50473==         suppressed: 0 bytes in 0 blocks
+==50473== 
+==50473== For lists of detected and suppressed errors, rerun with: -s
+==50473== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Step 3
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Action 1: Run Archive List
--- List the files in the previously created archive
-Expected output is in file 'test_results/raw/project_01-10-3-expected.tmp'
-Actual output is in file 'test_results/raw/project_01-10-3-actual.tmp'
-Test FAILED
-== Side-by-Side Comparison ==
-== Differing lines have a character like '|' '>' or '<' in the middle
-==== EXPECT ====   ==== ACTUAL ====
-hello.txt        | Unsupported op. Try: ./minitar c ARCHIVE [FILE...]
-== Line Differences ==
-EXPECT 1) hello.txt
-ACTUAL 1) Unsupported op. Try: ./minitar c ARCHIVE [FILE...]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------------------------------------------------------------------------------------
+Action 1: Not executed due to previous error(s)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Step 4
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 Action 1: Not executed due to previous error(s)

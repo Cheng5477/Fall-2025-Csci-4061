@@ -1,11 +1,11 @@
 #include "minitar.h"
 
-#include <stdlib.h>
 #include <fcntl.h>
 #include <grp.h>
 #include <math.h>
 #include <pwd.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/sysmacros.h>
@@ -126,50 +126,50 @@ int remove_trailing_bytes(const char *file_name, size_t nbytes) {
 
 int create_archive(const char *archive_name, const file_list_t *files) {
     // Checking whether archive_name and files contain the valid value
-    if(archive_name == NULL || files == NULL || files->head == NULL || files->size == 0){
+    if (archive_name == NULL || files == NULL || files->head == NULL || files->size == 0) {
         return -1;
     }
 
     // Creating a new archive
-    FILE* archive = fopen(archive_name, "w");
+    FILE *archive = fopen(archive_name, "w");
     // Checking whether the archive is successfully created
-    if(archive == NULL){
+    if (archive == NULL) {
         perror("archive open");
         return -1;
     }
     // Create visual space for header
     tar_header *header = malloc(sizeof(tar_header));
     // Checking whether the space has created
-    if(header == NULL){
+    if (header == NULL) {
         perror("malloc");
         fclose(archive);
         return -1;
     }
     // Save files's head into current
     node_t *current = files->head;
-    for (size_t i = 0; i < files->size; i++){
+    for (size_t i = 0; i < files->size; i++) {
         char *file_name = current->name;
-        // Checking whethe it is a valid node. If not, give out the error message, free the header and, and stop the program.
-        // if(file_name == NULL){
+        // Checking whethe it is a valid node. If not, give out the error message, free the header
+        // and, and stop the program. if(file_name == NULL){
         //     perror("err_msg");
         //     free(header);
         //     fclose(archive);
         //     return -1;
         // }
         // //
-        if(fill_tar_header(header, file_name) != 0){
+        if (fill_tar_header(header, file_name) != 0) {
             free(header);
             fclose(archive);
             return -1;
         }
-        if(fwrite(header, 1, sizeof(tar_header), archive) != sizeof(tar_header)){
+        if (fwrite(header, 1, sizeof(tar_header), archive) != sizeof(tar_header)) {
             perror("fwrite header");
             free(header);
             fclose(archive);
             return -1;
         }
-        FILE* file = fopen(file_name, "r");
-        if(!file){
+        FILE *file = fopen(file_name, "r");
+        if (!file) {
             perror("file open");
             free(header);
             fclose(archive);
@@ -208,7 +208,7 @@ int create_archive(const char *archive_name, const file_list_t *files) {
         current = current->next;
     }
     char footer[2 * BLOCK_SIZE] = {0};
-    if (fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE){
+    if (fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE) {
         perror("fwrite footer");
         free(header);
         fclose(archive);
@@ -224,45 +224,45 @@ int create_archive(const char *archive_name, const file_list_t *files) {
 
 int append_files_to_archive(const char *archive_name, const file_list_t *files) {
     //
-    if(archive_name == NULL || files == NULL || files->head == NULL || files->size == 0){
+    if (archive_name == NULL || files == NULL || files->head == NULL || files->size == 0) {
         return -1;
     }
-    if(remove_trailing_bytes(archive_name, 1024) != 0){
+    if (remove_trailing_bytes(archive_name, 1024) != 0) {
         return -1;
     }
-    FILE* archive = fopen(archive_name, "a");
-    if(archive == NULL){
+    FILE *archive = fopen(archive_name, "a");
+    if (archive == NULL) {
         perror("archive fopen");
         return -1;
     }
     tar_header *header = malloc(sizeof(tar_header));
-    if(header == NULL){
+    if (header == NULL) {
         perror("malloc");
         fclose(archive);
         return -1;
     }
     node_t *current = files->head;
-    for (size_t i = 0; i < files->size; i++){
+    for (size_t i = 0; i < files->size; i++) {
         char *file_name = current->name;
-        if(file_name == NULL){
+        if (file_name == NULL) {
             perror("err_msg");
             free(header);
             fclose(archive);
             return -1;
         }
-        if(fill_tar_header(header, file_name) != 0){
+        if (fill_tar_header(header, file_name) != 0) {
             free(header);
             fclose(archive);
             return -1;
         }
-        if(fwrite(header, 1, sizeof(tar_header), archive) != sizeof(tar_header)){
+        if (fwrite(header, 1, sizeof(tar_header), archive) != sizeof(tar_header)) {
             perror("fwrite header");
             free(header);
             fclose(archive);
             return -1;
         }
-        FILE* file = fopen(file_name, "r");
-        if(!file){
+        FILE *file = fopen(file_name, "r");
+        if (!file) {
             perror("file open");
             free(header);
             fclose(archive);
@@ -301,7 +301,8 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files) 
         current = current->next;
     }
     char footer[BLOCK_SIZE] = {0};
-    if (fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE || fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE){
+    if (fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE ||
+        fwrite(footer, 1, sizeof(footer), archive) != BLOCK_SIZE) {
         perror("fwrite footer");
         free(header);
         fclose(archive);
@@ -316,7 +317,88 @@ int append_files_to_archive(const char *archive_name, const file_list_t *files) 
 }
 
 int get_archive_file_list(const char *archive_name, file_list_t *files) {
-    
+    if (archive_name == NULL || files == NULL) {
+        perror("Invalid input");
+        return -1;
+    }
+
+    //Reset the file list in case some potential problem
+    files->head = NULL;
+    files->size = 0;
+
+    // Open archive as reding mode
+    FILE *archive = fopen(archive_name, "rb");
+    if (!archive) {
+        perror("Unable to read archive");
+        return -1;
+    }
+
+    // Make a tar_header to store the information in header
+    tar_header *header;
+
+    node_t *trackingNode = NULL;
+
+    while (1) {
+        size_t n = fread(&header, 1, sizeof(tar_header), archive);
+        if (n != 512) {
+            perror("File read");
+            return -1;
+        }
+
+        size_t tmpSum = 0;
+        for (size_t i = 0; i < 512; i++) {
+            if (((char *) header)[i] != '0' &&
+                ((char *) header)[i] != '\0') {    // I'm not sure which 0 we use for padding
+                tmpSum = 1;
+                break;
+            }
+        }
+
+        // Check whether we reach the footer of the archive
+        if (tmpSum == 0) {
+            break;
+        }
+
+        // Create a new node to save the information of the list
+        node_t *curNode = malloc(sizeof(node_t));
+        if (!curNode) {
+            perror("malloc node");
+            fclose(archive);
+            return -1;
+        }
+
+        // Setup the curNode to be prepared for append
+        strncpy(curNode->name, header->name, sizeof(curNode->name) - 1);
+        curNode->name[sizeof(curNode->name) - 1] = '\0';
+        curNode->next = NULL;
+
+        // Find the correct position for curNode, then update the trackingNode
+        if (files->head == NULL) {
+            files->head = curNode;
+        } else {
+            trackingNode->next = curNode;
+        }
+
+        trackingNode = curNode;
+        files->size++;
+
+        // For far the pointer should jump to the starter of next header
+        long jump = ((strtol(header->size, NULL, 8) / 512) + 1) * 512;
+        if (fseek(archive, jump, SEEK_CUR) != 0) {
+            perror("fseek");
+            fclose(archive);
+            node_t *delNode = files->head;
+            node_t *temp;
+            while (delNode != NULL) {
+                temp = delNode;
+                delNode = delNode->next;
+                free(temp);
+            }
+            return -1;
+        }
+    }
+
+    fclose(archive);
     return 0;
 }
 
