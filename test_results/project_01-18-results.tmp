@@ -1,0 +1,37 @@
+====================================================================================================================================================================================
+== Test 18: Extract Single File Archive
+== Create an archive with minitar, then extract it with minitar and verify the
+== extracted file matches the source.
+Running test...
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Action 1: Run File Setup
+-- Copy source file into the working directory
+Expected output is in file 'test_results/raw/project_01-18-1-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-18-1-actual.tmp'
+Test PASSED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 2
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Action 1: Run Archive Creation
+-- Create an archive using 'minitar'
+Expected output is in file 'test_results/raw/project_01-18-2-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-18-2-actual.tmp'
+Test PASSED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 3
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Action 1: Run Archive Extraction
+-- Extract files using 'minitar'
+Expected output is in file 'test_results/raw/project_01-18-3-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-18-3-actual.tmp'
+Test PASSED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 4
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Action 1: Run File Comparison
+-- Compare extracted file with the original
+Expected output is in file 'test_results/raw/project_01-18-4-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-18-4-actual.tmp'
+Test PASSED

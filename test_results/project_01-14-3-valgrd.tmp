@@ -1,0 +1,15 @@
+==38000== Memcheck, a memory error detector
+==38000== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==38000== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==38000== Command: ./minitar -u -f test.tar f12.bin
+==38000== Parent PID: 37530
+==38000== 
+==38000== 
+==38000== HEAP SUMMARY:
+==38000==     in use at exit: 0 bytes in 0 blocks
+==38000==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==38000== 
+==38000== All heap blocks were freed -- no leaks are possible
+==38000== 
+==38000== For lists of detected and suppressed errors, rerun with: -s
+==38000== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,0 +1,6 @@
+$ set -e
+$ rm -f test.tar dup.txt extra.bin
+$ cp test_cases/resources/f3.txt dup.txt
+$ cp test_cases/resources/f1.bin extra.bin
+$ exit
+exit

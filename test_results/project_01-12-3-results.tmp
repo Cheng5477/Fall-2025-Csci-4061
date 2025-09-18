@@ -1,0 +1,19 @@
+-- List the files in the previously created archive
+Expected output is in file 'test_results/raw/project_01-12-3-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-12-3-actual.tmp'
+Test FAILED
+== Side-by-Side Comparison ==
+== Differing lines have a character like '|' '>' or '<' in the middle
+==== EXPECT ====   ==== ACTUAL ====
+hello.txt        | Unsupported op. Try: ./minitar c ARCHIVE [FILE...]
+f18.txt          <
+f20.bin          <
+f19.bin          <
+f13.txt          <
+== Line Differences ==
+EXPECT 1) hello.txt
+ACTUAL 1) Unsupported op. Try: ./minitar c ARCHIVE [FILE...]
+EXPECT 2) f18.txt
+EXPECT 3) f20.bin
+EXPECT 4) f19.bin
+EXPECT 5) f13.txt

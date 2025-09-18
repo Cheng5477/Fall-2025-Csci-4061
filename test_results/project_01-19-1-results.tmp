@@ -1,0 +1,4 @@
+-- Copy multiple source files into the working directory
+Expected output is in file 'test_results/raw/project_01-19-1-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-19-1-actual.tmp'
+Test PASSED

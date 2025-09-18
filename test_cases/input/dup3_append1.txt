@@ -1,0 +1,4 @@
+set -e
+cp test_cases/resources/f4.txt dup.txt
+./minitar -a -f test.tar dup.txt
+exit

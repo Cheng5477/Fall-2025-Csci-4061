@@ -1,0 +1,4 @@
+-- Extract files using minitar
+Expected output is in file 'test_results/raw/project_01-21-5-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-21-5-actual.tmp'
+Test PASSED

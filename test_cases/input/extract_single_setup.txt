@@ -1,0 +1,4 @@
+set -e
+rm -f test.tar f1.txt
+cp test_cases/resources/f1.txt .
+exit

@@ -1,0 +1,24 @@
+./testius test_cases/tests.json
+== Project 01
+== Running 17/17 tests
+Test  1) Create Single File Archive: Failed -> Results in test_results/project_01-01-results.tmp
+Test  2) Create Single Binary File Archive: Failed -> Results in test_results/project_01-02-results.tmp
+Test  3) Create Multi-File Archive: Failed -> Results in test_results/project_01-03-results.tmp
+Test  4) Create Archive - Large Text File: Failed -> Results in test_results/project_01-04-results.tmp
+Test  5) Create Archive - Large Binary File: Failed -> Results in test_results/project_01-05-results.tmp
+Test  6) Create Archive - Many Files: Failed -> Results in test_results/project_01-06-results.tmp
+Test  7) Append Single File to Archive: Failed -> Results in test_results/project_01-07-results.tmp
+Test  8) Append Single Large File to Archive: Failed -> Results in test_results/project_01-08-results.tmp
+Test  9) Append Multiple Files to Archive: Failed -> Results in test_results/project_01-09-results.tmp
+Test 10) Single-File Archive List: Failed -> Results in test_results/project_01-10-results.tmp
+Test 11) Multi-File Archive List: Failed -> Results in test_results/project_01-11-results.tmp
+Test 12) List Before and After Append: Failed -> Results in test_results/project_01-12-results.tmp
+Test 13) Update Single file in Archive: Failed -> Results in test_results/project_01-13-results.tmp
+Test 14) Attempt to Update Non-Existent File: Failed -> Results in test_results/project_01-14-results.tmp
+Test 15) Update Multiple files in Archive: Failed -> Results in test_results/project_01-15-results.tmp
+Test 16) Attempt to Update Multiple Non-Existent Files: Failed -> Results in test_results/project_01-16-results.tmp
+Test 17) Attempt to Update Existent and Non-existent Files: Failed -> Results in test_results/project_01-17-results.tmp
+
+Ran 17/17 Requested Tests
+Passed 0/17 Tests
+Total Score: 0.0/17.0

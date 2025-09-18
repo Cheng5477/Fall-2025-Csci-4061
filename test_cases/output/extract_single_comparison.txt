@@ -1,0 +1,4 @@
+$ set -e
+$ diff -q f1.txt test_cases/resources/f1.txt
+$ exit
+exit

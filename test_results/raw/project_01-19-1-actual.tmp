@@ -1,0 +1,7 @@
+$ set -e
+$ rm -f test.tar hello.txt f1.bin f2.txt
+$ cp test_cases/resources/hello.txt .
+$ cp test_cases/resources/f1.bin .
+$ cp test_cases/resources/f2.txt .
+$ exit
+exit

@@ -1,0 +1,15 @@
+==37771== Memcheck, a memory error detector
+==37771== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==37771== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==37771== Command: ./minitar -a -f test.tar f1.txt
+==37771== Parent PID: 37530
+==37771== 
+==37771== 
+==37771== HEAP SUMMARY:
+==37771==     in use at exit: 0 bytes in 0 blocks
+==37771==   total heap usage: 26 allocs, 26 frees, 28,769 bytes allocated
+==37771== 
+==37771== All heap blocks were freed -- no leaks are possible
+==37771== 
+==37771== For lists of detected and suppressed errors, rerun with: -s
+==37771== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,0 +1,4 @@
+-- Verify dup.txt equals the last version (v2)
+Expected output is in file 'test_results/raw/project_01-20-5-expected.tmp'
+Actual output is in file 'test_results/raw/project_01-20-5-actual.tmp'
+Test PASSED

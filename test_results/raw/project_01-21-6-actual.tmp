@@ -1,0 +1,5 @@
+$ set -e
+$ diff -q dup.txt   test_cases/resources/hello.txt
+$ diff -q extra.bin test_cases/resources/f1.bin
+$ exit
+exit
